@@ -46,7 +46,7 @@ void setup() {
     delay(1000);
 
     elapsedMs = 0;
-    wavWriter.open("new.wav", Fs, 2);
+    wavWriter.open("new.wav", Fs, 1);
 
     Serial.println("Done initilizing! Starting now!");
 }
