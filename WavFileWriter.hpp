@@ -23,6 +23,9 @@
 //
 ////////////////////////////////////////////////////////////
 
+#ifndef WAVFILEWRITER_INCLUDE
+#define WAVFILEWRITER_INCLUDE
+
 #include <SD.h>
 #include <SD_t3.h>
 #include <record_queue.h>
@@ -45,3 +48,5 @@ private:
     uint32_t              m_totalBytesWritten;
     uint8_t               m_buffer[512];
 };
+
+#endif // WAVFILEWRITER_INCLUDE
