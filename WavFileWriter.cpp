@@ -29,20 +29,25 @@
 
 namespace {
 
-    // Teensy Audio Shield Defaults
+    // Teensy Audio Shield Rev D (Teensy 4.x)
     const uint8_t SDcard_CS_Pin    = 10;
-    const uint8_t SDcard_MOSI_Pin  =  7;
-    const uint8_t SDcard_SCK_Pin   = 14;
+    const uint8_t SDcard_MOSI_Pin  = 11;
+    const uint8_t SDcard_SCK_Pin   = 13;
 
-    // Use these with the Teensy 3.5 & 3.6 SD card (Should work, but not yet tested)
-    //const uint8_t SDcard_CS_Pin    = BUILTIN_SDCARD
-    //const uint8_t SDcard_MOSI_Pin  = 11  // not actually used
-    //const uint8_t SDcard_SCK_Pin   = 13  // not actually used
+    // Teensy Audio Shield Rev B+C (Teensy 3.x)
+    // const uint8_t SDcard_CS_Pin    = 10;
+    // const uint8_t SDcard_MOSI_Pin  =  7;
+    // const uint8_t SDcard_SCK_Pin   = 14;
+
+    // Use these with the Teensy 3.5 & 3.6 internal SD card (Should work, but not yet tested)
+    // const uint8_t SDcard_CS_Pin    = BUILTIN_SDCARD
+    // const uint8_t SDcard_MOSI_Pin  = 11  // not actually used
+    // const uint8_t SDcard_SCK_Pin   = 13  // not actually used
 
     // Use these for the SD+Wiz820 or other adaptors (Should work, but not yet tested)
-    //const uint8_t SDcard_CS_Pin    =  4
-    //const uint8_t SDcard_MOSI_Pin  = 11
-    //const uint8_t SDcard_SCK_Pin   = 13
+    // const uint8_t SDcard_CS_Pin    =  4
+    // const uint8_t SDcard_MOSI_Pin  = 11
+    // const uint8_t SDcard_SCK_Pin   = 13
 
     // The following functions takes integers in host byte order
     // and writes them to a stream as little endian
@@ -88,6 +93,7 @@ bool WavFileWriter::open(const char *fileName, unsigned int sampleRate, unsigned
     SPI.setMOSI(SDcard_MOSI_Pin);
     SPI.setSCK(SDcard_SCK_Pin);
     if (!(SD.begin(SDcard_CS_Pin))) {
+        // Note: The SD library only supports FAT16 and FAT32 so make sure the card is formatted correctly!
         Serial.println("Unable to access the SD card while trying to write WAV file.");
         return false;
     }
